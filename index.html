@@ -1,0 +1,113 @@
+<html>
+<head>
+<link rel="stylesheet" href="registerDetails.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<title>
+</title>
+<body>
+<div class="form" id="form1">
+<form id="dataForm">
+      <div class="title">Welcome</div>
+      <div class="subtitle">Let's create your account!</div>
+      <div class="input-container ic1">
+        <input id="firstname" name="f_name" class="input" type="text" placeholder=" " />
+        <div class="cut"></div>
+        <label for="firstname" class="placeholder">First name</label>
+      </div>
+      <div class="input-container ic2">
+        <input id="lastname" class="input" name="l_name" type="text" placeholder=" " />
+        <div class="cut"></div>
+        <label for="lastname" class="placeholder">Last name</label>
+      </div>
+	<div class="input-container ic2">
+        <input id="mobno" class="input" type="text" name="what_no" placeholder=" " />
+        <div class="cut cut-short"></div>
+        <label for="=mobno" class="placeholder">whatsapp no</>
+      </div>
+       <button type="button" class="submit" id="button1">submit</button>
+</form>
+    </div>
+<div class="form" style="display:none;" id="form2">
+<div class="row">
+<div class="card" style="width: 18rem;">
+   <div class="card-body">
+    <button type="button"id="btnId" class="card-text">Show me</Button>
+  </div>
+</div>
+</div>
+<div id="hide" style="display:none">
+ <div id="output"></div></div>
+</div>
+
+<script>
+
+$("#button1").click(function(){
+submitToGoogleSheet()
+	 $('#form1').css('display','none')
+	 $('#form2').css('display','block');
+});
+
+$("#btnId").click(function(){
+
+$('#form1').css('display','none');
+$('#btnId').css('display','none')
+$('#hide').css('display','block');
+ const messages = [
+            "Better luck next time",
+            "Better luck next time",
+            "Better luck next time",
+ 		Math.floor(Math.random() * 100) + 1, 
+            "Better luck next time",
+            "Better luck next time",
+            Math.floor(Math.random() * 100) + 1, 
+            "Better luck next time",
+            Math.floor(Math.random() * 100) + 1 
+        ];
+
+
+         const randomItem = messages[Math.floor(Math.random() * messages.length)];
+
+            // Display the selected item
+             document.getElementById('output').textContent = "";
+
+            document.getElementById('output').textContent = randomItem;
+
+        });
+
+ const scriptURL = 'https://script.google.com/macros/s/AKfycbw9RlUmHeSLvg2ipp9tF3uHW1JC5KIJUqChnefZRlRXbyDFcDpN7ZybpztqpdPrDnNT/exec'; 
+        async function submitToGoogleSheet() {
+            const form = document.getElementById('dataForm');
+            const formData = new FormData(form);
+
+            const data = {
+                first_name: formData.get('f_name'),
+                last_name: formData.get('l_name'),
+                whatsapp_no: formData.get('what_no'),
+            };
+console.log(data)
+            try {
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*'},
+                    mode:'no-cors',
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert('Data submitted successfully!');
+                   
+                } else {
+                    throw new Error('Failed to submit data.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error submitting data.');
+            }
+        }
+
+
+</script>
+</body>
+</html>
