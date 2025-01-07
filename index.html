@@ -16,8 +16,11 @@
         <label for="firstname" class="placeholder">First name</label>
       </div>
       <div class="input-container ic2">
-        <input id="lastname" class="input" name="l_name" type="text" placeholder=" " />
-        <div class="cut"></div>
+	<select id="lastname" class="input" name="l_name" type="text" placeholder=" ">
+	<option>bhyander</option>
+	<option>NSP</option>
+	</select>
+         <div class="cut"></div>
         <label for="lastname" class="placeholder">Last name</label>
       </div>
 	<div class="input-container ic2">
@@ -37,7 +40,8 @@
 </div>
 </div>
 <div id="hide" style="display:none">
- <div id="output"></div></div>
+ <h1 id="output" Style="color:rgb(100, 185, 221),text-align:center"></h1></div>
+ <img src="images/college.jpg" width="80px" height="100px">
 </div>
 
 <script>
@@ -62,7 +66,7 @@ $('#hide').css('display','block');
             "Better luck next time",
             Math.floor(Math.random() * 100) + 1, 
             "Better luck next time",
-            Math.floor(Math.random() * 100) + 1 
+	Math.floor(Math.random() * 100) + 1 
         ];
 
 
@@ -102,9 +106,8 @@ console.log(data)
                     throw new Error('Failed to submit data.');
                 }
             } catch (error) {
-                console.error('Error:', error);
-                alert('Error submitting data.');
-            }
+
+                           }
         }
 
 
