@@ -2,31 +2,38 @@
 <head>
 <link rel="stylesheet" href="registerDetails.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <title>
 </title>
 <body>
 <div class="form" id="form1">
 <form id="dataForm">
-      <div class="title">Welcome</div>
-      <div class="subtitle">Let's create your account!</div>
+      <div class="title">9 TEAS CAFE </div>
+      <div class="subtitle">CELEBIRATING 6th YEARS OF <br> 9 TEAS CAFE</div>
       <div class="input-container ic1">
         <input id="firstname" name="f_name" class="input" type="text" placeholder=" " />
         <div class="cut"></div>
         <label for="firstname" class="placeholder">First name</label>
       </div>
       <div class="input-container ic2">
-	<select id="lastname" class="input" name="l_name" type="text" placeholder=" ">
-	<option>bhyander</option>
-	<option>NSP</option>
+	<select id="lastname" class="input" name="l_name" required type="text" placeholder=" ">
+        <option>Please Select Outlets</option>
+        <option>Bhayander</option>
+	<option>Nallasopara</option>
+        <option>Virar</option>
+	<option>Anand Bhavan</option>
+	<option>Vasai East</option>
+	<option>Vasai West</option>
+	<option>Tagore Town</option>
 	</select>
-         <div class="cut"></div>
-        <label for="lastname" class="placeholder">Last name</label>
+    
+        <label for="Outlets" class="placeholder"></label>
       </div>
 	<div class="input-container ic2">
-        <input id="mobno" class="input" type="text" name="what_no" placeholder=" " />
+        <input id="mobno" class="input" type="text" required maxlength="10" name="what_no" placeholder=" " />
         <div class="cut cut-short"></div>
-        <label for="=mobno" class="placeholder">whatsapp no</>
+        <label for="=mobno" class="placeholder">whatsapp no </label>
       </div>
        <button type="button" class="submit" id="button1">submit</button>
 </form>
@@ -35,18 +42,32 @@
 <div class="row">
 <div class="card" style="width: 18rem;">
    <div class="card-body">
-    <button type="button"id="btnId" class="card-text">Show me</Button>
+    <button type="button"id="btnId" class="card-text" ><img src="images/9teas3.jpeg" alt="9teas"  height="50%" style="display: block; margin: auto;"></Button>
   </div>
 </div>
 </div>
 <div id="hide" style="display:none">
  <h1 id="output" Style="color:rgb(100, 185, 221);text-align:center"></h1></div>
- <img src="images/college.jpg" width="80px" height="100px">
+ <a href="index.html"><img src="images/9teascafe.png"  height="50%"></a>
+ <div>
+</div>
 </div>
 
 <script>
 
 $("#button1").click(function(){
+    var mob=$('#mobno').val();
+    const length = mob.length;
+    console.log(length);
+if(mob=='' ||  length<"10"){
+    alert('Please Enter 10 Digit Mob NO ');
+return false;
+}
+var first=$('#firstname').val();
+if(first==''){
+    alert('Please Enter First Name ');
+return false;
+}
 submitToGoogleSheet()
 	 $('#form1').css('display','none')
 	 $('#form2').css('display','block');
@@ -58,15 +79,54 @@ $('#form1').css('display','none');
 $('#btnId').css('display','none')
 $('#hide').css('display','block');
  const messages = [
-            "Better luck next time",
-            "Better luck next time",
-            "Better luck next time",
- 		Math.floor(Math.random() * 100) + 1, 
-            "Better luck next time",
-            "Better luck next time",
-            Math.floor(Math.random() * 100) + 1, 
-            "Better luck next time",
-	Math.floor(Math.random() * 100) + 1 
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+"Congratulations You Won Lava Cake", 
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+"Congratulations You Won Lava Cake",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+    
+"Congratulations You Won Lava Cake", 
+	"9Tea's Platters",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+
+ "Congratulations You Won Corn Pizza 6",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+
+"Congratulations You Won Corn Pizza 6",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+
+"Congratulations You Won Margherita Pizza 6",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Paticipating Better Luck Next Time ",
+"Thank You Paticipating Better Luck Next Time ",
+
+"Congratulations You Won Lava Cake",    
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+
+"Congratulations You Won veg  Burgur",
+"Thank You Paticipating Better Luck Next Time ",
+"Thank You Paticipating Better Luck Next Time ",
+"Thank You Paticipating Better Luck Next Time ",
+
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time ",
+"Thank You Particapating Better Luck Next Time "
+
         ];
 
 
@@ -76,9 +136,8 @@ $('#hide').css('display','block');
              document.getElementById('output').textContent = "";
 
             document.getElementById('output').textContent = randomItem;
-
+            
         });
-
  const scriptURL = 'https://script.google.com/macros/s/AKfycbw9RlUmHeSLvg2ipp9tF3uHW1JC5KIJUqChnefZRlRXbyDFcDpN7ZybpztqpdPrDnNT/exec'; 
         async function submitToGoogleSheet() {
             const form = document.getElementById('dataForm');
@@ -112,5 +171,7 @@ console.log(data)
 
 
 </script>
+
+
 </body>
 </html>
